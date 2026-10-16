@@ -46,32 +46,32 @@ def live_camera(glasses_by_style, active_style, live_scale, live_dy, live_opacit
     data = json.dumps(payload)
     html = f'''<!doctype html><html><style>
     *{{box-sizing:border-box}}body{{margin:0;background:#fff;font-family:Arial;color:white;overflow:hidden}}
-    #stage{{position:relative;width:100%;height:440px;background:#111}}video,canvas{{position:absolute;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}}
+    #stage{{position:relative;width:100%;height:360px;background:#111}}video,canvas{{position:absolute;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}}
     #msg{{position:absolute;inset:45% 0 auto;text-align:center;color:#fff;background:#0008;padding:10px}}
-    #styles{{position:absolute;bottom:78px;left:0;right:0;display:flex;gap:6px;justify-content:center}}#tray{{position:absolute;bottom:0;left:0;right:0;display:flex;gap:8px;justify-content:center;overflow-x:auto;padding:10px;background:linear-gradient(transparent,#000d)}}#capture{{display:block;width:100%;height:58px;border:0;border-top:1px solid #ddd;border-radius:18px 18px 0 0;background:#fff;color:#222;font-size:16px;cursor:pointer}}
+    #styles{{position:absolute;bottom:78px;left:0;right:0;display:flex;gap:6px;justify-content:center}}#tray{{position:absolute;bottom:0;left:0;right:0;display:flex;gap:8px;justify-content:center;overflow-x:auto;padding:10px;background:linear-gradient(transparent,#000d)}}#capture{{display:block;width:100%;height:42px;border:0;border-top:1px solid #ddd;border-radius:14px 14px 0 0;background:#fff;color:#222;font-size:14px;cursor:pointer}}
     button{{flex:0 0 66px;height:58px;border:2px solid #fff8;border-radius:14px;background:#fff;color:#222;font-size:12px}}
     button.active{{border-color:#00e0d0;background:#dffffb}}button img{{max-width:58px;max-height:38px}}
-    @media(max-width:600px){{#stage{{height:66vh;min-height:360px}}}}
+    @media(max-width:600px){{#stage{{height:360px}}#capture{{height:42px;font-size:14px}}}}
     </style><div id="stage"><video id="video" autoplay playsinline></video><canvas id="canvas"></canvas><div id="msg">Starting camera…</div><div id="styles"></div><div id="tray"></div></div><button id="capture" type="button">Take photo</button>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script><script>
     const catalog={data}; const fit={{scale:{live_scale}*{1.08 if live_wearing else 1.0},dy:{live_dy},opacity:{max(live_opacity, 0.95) if live_wearing else live_opacity},wearing:{str(live_wearing).lower()},thorough:{str(live_thorough).lower()}}}; let style='{active_style}', idx=0, stream, video=document.getElementById('video'), canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d'), msg=document.getElementById('msg'), tray=document.getElementById('tray'), img=new Image();
     function makeTray(){{tray.innerHTML='';catalog[style].forEach((g,i)=>{{let b=document.createElement('button');b.innerHTML='<img src="'+g.src+'">';b.onclick=()=>{{idx=i;img.src=g.src;document.querySelectorAll('#tray button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}};tray.appendChild(b)}});tray.children[idx]?.classList.add('active');img.src=catalog[style][idx].src}}
-    async function start(){{try{{stream=await navigator.mediaDevices.getUserMedia({{video:{{facingMode:'user',width:{{ideal:1280}},height:{{ideal:720}}}},audio:false}});video.srcObject=stream;msg.style.display='none';loop()}}catch(e){{msg.textContent='Camera access is unavailable. Allow camera permission or use Upload photo below.'}}}}
+    async function start(){{try{{stream=await navigator.mediaDevices.getUserMedia({{video:{{facingMode:'user',width:{{ideal:640}},height:{{ideal:480}},frameRate:{{ideal:24,max:30}}}},audio:false}});video.srcObject=stream;msg.style.display='none';loop()}}catch(e){{msg.textContent='Camera access is unavailable. Allow camera permission or use Upload photo below.'}}}}
     const mesh=new FaceMesh({{locateFile:f=>'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/'+f}});mesh.setOptions({{maxNumFaces:{4 if live_thorough else 1},refineLandmarks:true,minDetectionConfidence:.65,minTrackingConfidence:.65}});
     let smooth=null;
     function avg(p,ids){{let x=0,y=0;ids.forEach(i=>{{x+=p[i].x;y+=p[i].y}});return {{x:x/ids.length,y:y/ids.length}}}}
     mesh.onResults(r=>{{ctx.clearRect(0,0,canvas.width,canvas.height);if(!r.multiFaceLandmarks?.length){{smooth=null;return}}let p=r.multiFaceLandmarks[0], left=avg(p,[33,133]), right=avg(p,[362,263]), cx=(left.x+right.x)/2*canvas.width, cy=(left.y+right.y)/2*canvas.height, dist=Math.hypot((right.x-left.x)*canvas.width,(right.y-left.y)*canvas.height), angle=Math.atan2((right.y-left.y)*canvas.height,(right.x-left.x)*canvas.width),g=catalog[style][idx],w=dist/0.50*g.sx*fit.scale,h=img.naturalHeight/img.naturalWidth*w*g.sy;let target={{x:cx,y:cy+fit.dy*dist,w,h,a:angle}};smooth=smooth||target;smooth.x+=(target.x-smooth.x)*.35;smooth.y+=(target.y-smooth.y)*.35;smooth.w+=(target.w-smooth.w)*.35;smooth.h+=(target.h-smooth.h)*.35;smooth.a+=(target.a-smooth.a)*.35;
     ctx.save();ctx.globalAlpha=.55+.45*fit.opacity;ctx.translate(smooth.x,smooth.y);ctx.rotate(smooth.a);ctx.drawImage(img,-smooth.w/2,-smooth.h*0.50,smooth.w,smooth.h);ctx.restore()}});
-    async function loop(){{if(video.readyState>=2){{canvas.width=video.videoWidth;canvas.height=video.videoHeight;await mesh.send({{image:video}})}}requestAnimationFrame(loop)}}
+    let lastFrame=0;async function loop(now=0){{if(video.readyState>=2 && now-lastFrame>=42){{lastFrame=now;let w=video.videoWidth,h=video.videoHeight,scale=Math.min(1,640/Math.max(w,h));canvas.width=Math.max(1,Math.round(w*scale));canvas.height=Math.max(1,Math.round(h*scale));await mesh.send({{image:video}})}}requestAnimationFrame(loop)}}
     document.getElementById('capture').onclick=()=>{{if(!canvas.width)return;let shot=document.createElement('canvas');shot.width=canvas.width;shot.height=canvas.height;let sc=shot.getContext('2d');sc.drawImage(video,0,0,shot.width,shot.height);sc.drawImage(canvas,0,0);let a=document.createElement('a');a.download='sunglasses-try-on.png';a.href=shot.toDataURL('image/png');a.click()}};
     makeTray();start();
     </script></html>'''
-    components.html(html, height=500, scrolling=False)
+    components.html(html, height=410, scrolling=False)
 
 st.title("🕶️ AuraLens")
 with st.sidebar:
     st.header("AuraLens")
-    style=st.selectbox("Style",STYLES,format_func=str.capitalize)
+    style=st.selectbox("Style",STYLES,index=1,format_func=str.capitalize)
     st.header("Fit & realism"); scale=st.slider("Size",.80,1.30,1.0,.01); dy=st.slider("Vertical offset",-.40,.40,0.0,.01); opacity=st.slider("Lens darkness",.40,1.0,.90,.01); match=st.checkbox("Match photo lighting / noise / blur",True); shadow=st.slider("Shadow on face",0.0,.6,.30,.01); wearing=st.checkbox("Already wearing glasses",False); thorough=st.checkbox("Search for small / extra faces",False)
 st.subheader("Camera Try-on")
 all_variants={s:variants(s) for s in STYLES}
