@@ -1,0 +1,329 @@
+[
+  {
+    "image": "dim_alex.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.67,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": -9.7,
+        "pitch": -4.3,
+        "roll": -2.0,
+        "pupil_px": 64,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "frontal_obama.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.09,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": -1.7,
+        "pitch": -4.8,
+        "roll": -0.6,
+        "pupil_px": 106,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "frontal_rudd.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.21,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": -0.3,
+        "pitch": 3.8,
+        "roll": 0.2,
+        "pupil_px": 295,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "glasses_trio.jpg",
+    "status": "rendered",
+    "faces": 3,
+    "seconds": 0.15,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": 12.2,
+        "pitch": -18.1,
+        "roll": -18.3,
+        "pupil_px": 43,
+        "warnings": [
+          "Existing-glasses mode: frames of the original glasses may still peek out around the edges."
+        ]
+      },
+      {
+        "face": 2,
+        "source": "direct",
+        "yaw": -17.6,
+        "pitch": -21.6,
+        "roll": 20.0,
+        "pupil_px": 40,
+        "warnings": [
+          "Existing-glasses mode: frames of the original glasses may still peek out around the edges."
+        ]
+      },
+      {
+        "face": 3,
+        "source": "direct",
+        "yaw": 2.7,
+        "pitch": -6.2,
+        "roll": -6.7,
+        "pupil_px": 35,
+        "warnings": [
+          "Existing-glasses mode: frames of the original glasses may still peek out around the edges."
+        ]
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "glasses_woman.jpg",
+    "status": "rendered",
+    "faces": 2,
+    "seconds": 0.12,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": 10.5,
+        "pitch": -15.3,
+        "roll": -11.4,
+        "pupil_px": 36,
+        "warnings": [
+          "Existing-glasses mode: frames of the original glasses may still peek out around the edges."
+        ]
+      },
+      {
+        "face": 2,
+        "source": "direct",
+        "yaw": -1.4,
+        "pitch": -13.0,
+        "roll": -10.4,
+        "pupil_px": 33,
+        "warnings": [
+          "Existing-glasses mode: frames of the original glasses may still peek out around the edges."
+        ]
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "group_friends.jpg",
+    "status": "rendered",
+    "faces": 5,
+    "seconds": 1.14,
+    "details": [
+      {
+        "face": 1,
+        "source": "tile",
+        "yaw": 12.3,
+        "pitch": 12.4,
+        "roll": -2.4,
+        "pupil_px": 41,
+        "warnings": [
+          "Face needed a fallback detector (tile); landmarks may be less accurate."
+        ]
+      },
+      {
+        "face": 2,
+        "source": "tile",
+        "yaw": 1.0,
+        "pitch": 4.8,
+        "roll": -13.3,
+        "pupil_px": 35,
+        "warnings": [
+          "Face needed a fallback detector (tile); landmarks may be less accurate."
+        ]
+      },
+      {
+        "face": 3,
+        "source": "tile",
+        "yaw": -16.6,
+        "pitch": 6.9,
+        "roll": 5.5,
+        "pupil_px": 38,
+        "warnings": [
+          "Face needed a fallback detector (tile); landmarks may be less accurate."
+        ]
+      },
+      {
+        "face": 4,
+        "source": "tile",
+        "yaw": 1.3,
+        "pitch": 15.1,
+        "roll": -4.6,
+        "pupil_px": 36,
+        "warnings": [
+          "Face needed a fallback detector (tile); landmarks may be less accurate."
+        ]
+      },
+      {
+        "face": 5,
+        "source": "tile",
+        "yaw": -10.5,
+        "pitch": 11.6,
+        "roll": 6.4,
+        "pupil_px": 36,
+        "warnings": [
+          "Face needed a fallback detector (tile); landmarks may be less accurate."
+        ]
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "group_trio.jpg",
+    "status": "rendered",
+    "faces": 3,
+    "seconds": 0.42,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": 8.6,
+        "pitch": -4.2,
+        "roll": -10.9,
+        "pupil_px": 35,
+        "warnings": []
+      },
+      {
+        "face": 2,
+        "source": "direct",
+        "yaw": -5.2,
+        "pitch": -11.9,
+        "roll": 7.5,
+        "pupil_px": 32,
+        "warnings": []
+      },
+      {
+        "face": 3,
+        "source": "direct",
+        "yaw": 8.6,
+        "pitch": -1.0,
+        "roll": -1.6,
+        "pupil_px": 29,
+        "warnings": [
+          "Face is small (29px between pupils); result will be low-detail."
+        ]
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "lowlight_cooper_synth.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.16,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": 14.3,
+        "pitch": 11.2,
+        "roll": -3.5,
+        "pupil_px": 197,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "negative_dogs.jpg",
+    "status": "refused (error shown to user)",
+    "faces": 0,
+    "seconds": 0.0,
+    "details": [],
+    "error": "No face was found. Tips: use a clear photo where the eyes are visible, face the camera (or turn at most ~60 degrees), avoid heavy shadows, hands or masks over the eyes, and make sure the face is not tiny in the frame. Nothing was drawn."
+  },
+  {
+    "image": "tilted_angelina_rot25.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.17,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": -16.4,
+        "pitch": -3.1,
+        "roll": -25.9,
+        "pupil_px": 185,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "turned_lena.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.08,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": -21.8,
+        "pitch": 8.3,
+        "roll": 0.1,
+        "pupil_px": 67,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "turned_lin.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.1,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": -10.6,
+        "pitch": 3.9,
+        "roll": 0.7,
+        "pupil_px": 122,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  },
+  {
+    "image": "turned_obama2.jpg",
+    "status": "rendered",
+    "faces": 1,
+    "seconds": 0.1,
+    "details": [
+      {
+        "face": 1,
+        "source": "direct",
+        "yaw": 14.9,
+        "pitch": 1.1,
+        "roll": 6.2,
+        "pupil_px": 121,
+        "warnings": []
+      }
+    ],
+    "error": ""
+  }
+]
